@@ -291,7 +291,6 @@
     var sum=$("summary").value.trim();
     $("p-summary-wrap").innerHTML = sum ? '<h3>Summary</h3><p>'+esc(sum)+'</p>' : '';
 
-    var xps = all("xp",".item",".x-desc");
     // gather from items in order
     var xpHTML="";
     Array.prototype.slice.call($("xp").querySelectorAll(".item")).forEach(function(it){
