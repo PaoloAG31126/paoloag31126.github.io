@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearCV — 100% free resume builder. No watermark. No account.</title>
+<meta name="description" content="Build a clean, professional resume in your browser. 100% free, no watermark, no sign-up, no paywall. Your data never leaves your device. Download PDF or print instantly.">
+<style>
+  :root{
+    --ink:#1a1d24; --muted:#5b6472; --line:#e3e7ee;
+    --brand:#0b6e4f; --brand-2:#0e8a63; --paper:#ffffff;
+    --bg:#f4f6f9; --accent:#0b6e4f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.5;
+  }
+  header.site{
+    background:linear-gradient(135deg,#0b6e4f,#0e8a63); color:#fff;
+    padding:1.1rem 1.4rem; display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.2rem; justify-content:space-between;
+  }
+  header.site .brand{font-size:1.35rem; font-weight:800; letter-spacing:.2px;}
+  header.site .brand span{font-weight:400; opacity:.9;}
+  .badges{display:flex; flex-wrap:wrap; gap:.4rem;}
+  .badge{font-size:.72rem; font-weight:600; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:.25rem .55rem; border-radius:999px;}
+  .wrap{max-width:1200px; margin:0 auto; padding:1.2rem;}
+  .topbar{display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; justify-content:space-between; margin-bottom:1rem;}
+  .template-select{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap;}
+  .template-select label{font-weight:600; font-size:.9rem;}
+  select, .btn{
+    font:inherit; border-radius:8px; border:1px solid var(--line);
+  }
+  select{padding:.5rem .7rem; background:#fff;}
+  .btn{cursor:pointer; font-weight:600; padding:.6rem .95rem; transition:transform .05s ease, background .15s ease;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--brand); color:#fff; border-color:var(--brand);}
+  .btn-primary:hover{background:var(--brand-2);}
+  .btn-ghost{background:#fff; color:var(--ink);}
+  .btn-ghost:hover{background:#f0f3f7;}
+  .btn-danger{background:#fff; color:#b42318; border-color:#f3c1bc;}
+  .grid{display:grid; grid-template-columns:minmax(320px,1fr) minmax(360px,1.15fr); gap:1.2rem; align-items:start;}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr;} }
+  .panel{background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.1rem;}
+  .panel h2{margin:0 0 .3rem; font-size:1.15rem;}
+  .panel .hint{color:var(--muted); font-size:.85rem; margin:0 0 1rem;}
+  fieldset{border:none; margin:0 0 1.1rem; padding:0;}
+  legend{font-weight:700; font-size:.95rem; padding:0; margin-bottom:.5rem; color:var(--ink);}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:.6rem;}
+  @media (max-width:520px){ .row{grid-template-columns:1fr;} }
+  label.field{display:block; font-size:.8rem; color:var(--muted); margin-bottom:.55rem;}
+  input,textarea{width:100%; font:inherit; padding:.55rem .65rem; border:1px solid var(--line); border-radius:8px; background:#fbfcfe;}
+  input:focus,textarea:focus,select:focus{outline:2px solid #bfe3d3; border-color:var(--brand-2); background:#fff;}
+  textarea{min-height:74px; resize:vertical;}
+  .item{border:1px dashed var(--line); border-radius:10px; padding:.7rem .7rem .5rem; margin-bottom:.7rem; background:#fbfcfe;}
+  .item .del{float:right; background:none; border:none; color:#b42318; cursor:pointer; font-size:.8rem; font-weight:600; padding:.2rem .3rem;}
+  .add{background:#eef7f1; color:var(--brand); border:1px dashed #bfe3d3; width:100%; padding:.5rem; border-radius:8px; font-weight:600; cursor:pointer;}
+  .add:hover{background:#e3f3ea;}
+  .toolbar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center;}
+  .toolbar .spacer{flex:1;}
+  .status{font-size:.82rem; color:var(--muted);}
+
+  /* ---------- CV preview (A4-ish) ---------- */
+  .cv-stage{padding:1.2rem; background:#eef1f5; border-radius:14px;}
+  .cv{
+    background:#fff; width:100%; max-width:794px; margin:0 auto;
+    min-height:1123px; padding:52px 56px; color:#1c1f26;
+    box-shadow:0 10px 30px rgba(20,30,50,.12); border-radius:4px;
+    font-size:14px; line-height:1.55;
+  }
+  .cv h1{margin:0 0 .15rem; font-size:30px; letter-spacing:.3px;}
+  .cv .role{font-size:16px; font-weight:600; margin:0 0 .9rem;}
+  .cv .contacts{display:flex; flex-wrap:wrap; gap:.35rem .9rem; font-size:12.5px; color:#3a3f49; margin-bottom:1.2rem; padding-bottom:.9rem; border-bottom:2px solid #1c1f26;}
+  .cv h3{font-size:13px; text-transform:uppercase; letter-spacing:.12em; margin:1.3rem 0 .5rem;}
+  .cv .entry{margin-bottom:.9rem;}
+  .cv .entry .head{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;}
+  .cv .entry .title{font-weight:700; font-size:14.5px;}
+  .cv .entry .org{color:#3a3f49;}
+  .cv .entry .when{font-size:12.5px; color:#5b6472; white-space:nowrap;}
+  .cv .entry p{margin:.25rem 0 0; color:#2b2f37;}
+  .cv ul.skills{margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:.4rem .6rem;}
+  .cv ul.skills li{background:#eef1f5; border-radius:999px; padding:.22rem .7rem; font-size:12.5px;}
+  .cv p.empty{color:#9aa3b1; font-style:italic;}
+  .cv .name-empty{color:#b9c0cc;}
+
+  /* Template: Classic — accent color changes */
+  .cv.tpl-classic{padding:56px;}
+  .cv.tpl-classic .contacts{border-bottom-color:#8a5a2b;}
+  .cv.tpl-classic h1{font-family:Georgia,"Times New Roman",serif;}
+  .cv.tpl-classic h3{color:#8a5a2b;}
+  .cv.tpl-classic{font-family:Georgia,"Times New Roman",serif;}
+
+  /* Template: Modern — left brand bar */
+  .cv.tpl-modern{display:grid; grid-template-columns:230px 1fr; padding:0;}
+  .cv.tpl-modern .side{background:#0e2a23; color:#e8f1ee; padding:40px 26px;}
+  .cv.tpl-modern .side h1{color:#fff;}
+  .cv.tpl-modern .side .contacts{border-bottom:none; color:#cfe0da;}
+  .cv.tpl-modern .main{padding:40px 30px;}
+  .cv.tpl-modern h3{color:#0e8a63;}
+  .cv.tpl-modern ul.skills li{background:#eef6f2;}
+  @media (max-width:640px){ .cv.tpl-modern{grid-template-columns:1fr;} .cv.tpl-modern .side{padding:26px;} }
+
+  /* print */
+  @media print{
+    body *{visibility:hidden;}
+    .cv-stage,.cv-stage *{visibility:visible;}
+    .cv-stage{padding:0; background:#fff;}
+    .cv{box-shadow:none; max-width:none; min-height:auto; border-radius:0;}
+    @page{size:A4; margin:0;}
+  }
+
+  .tipjar{margin-top:1.3rem; background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.1rem; display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between;}
+  .tipjar .txt{max-width:640px;}
+  .tipjar .txt strong{display:block; font-size:1rem;}
+  .tipjar .txt p{margin:.2rem 0 0; color:var(--muted); font-size:.9rem;}
+  .tipjar .addr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.8rem; background:#f1f4f8; border:1px solid var(--line); border-radius:8px; padding:.35rem .5rem; word-break:break-all;}
+  footer.site{max-width:1200px; margin:1.5rem auto 2.5rem; padding:0 1.2rem; color:var(--muted); font-size:.85rem; text-align:center;}
+  footer.site a{color:var(--brand);}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="brand">Clear<span>CV</span></div>
+  <div class="badges">
+    <span class="badge">100% free</span>
+    <span class="badge">No watermark</span>
+    <span class="badge">No account</span>
+    <span class="badge">No paywall</span>
+    <span class="badge">Runs in your browser</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="topbar">
+    <div class="template-select">
+      <label for="tpl">Template</label>
+      <select id="tpl" aria-label="Choose a template">
+        <option value="clean">Clean (default)</option>
+        <option value="classic">Classic</option>
+        <option value="modern">Modern</option>
+      </select>
+    </div>
+    <div class="toolbar">
+      <span class="status" id="status">Your data stays on this device.</span>
+      <button class="btn btn-ghost" id="print" type="button">Print / Save PDF</button>
+      <button class="btn btn-primary" id="download" type="button">Download PDF</button>
+      <button class="btn btn-danger" id="clear" type="button">Clear</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- EDITOR -->
+    <section class="panel" aria-label="Resume editor">
+      <h2>Build your resume</h2>
+      <p class="hint">Fill this in. The preview updates as you type. Nothing is sent anywhere.</p>
+      <form id="form" autocomplete="off">
+        <fieldset>
+          <legend>Personal</legend>
+          <div class="row">
+            <label class="field">Full name <input id="name" type="text" placeholder="Alex Johnson"></label>
+            <label class="field">Headline / title <input id="title" type="text" placeholder="Frontend Developer"></label>
+          </div>
+          <div class="row">
+            <label class="field">Email <input id="email" type="text" placeholder="you@example.com"></label>
+            <label class="field">Phone <input id="phone" type="text" placeholder="+1 555 000 1234"></label>
+          </div>
+          <div class="row">
+            <label class="field">Location <input id="location" type="text" placeholder="Berlin, Germany"></label>
+            <label class="field">Website / LinkedIn <input id="link" type="text" placeholder="linkedin.com/in/..."></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Summary</legend>
+          <label class="field"><textarea id="summary" placeholder="2–3 lines about who you are and what you're looking for."></textarea></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Experience</legend>
+          <div id="xp"></div>
+          <button class="add" id="addXp" type="button">+ Add experience</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Education</legend>
+          <div id="edu"></div>
+          <button class="add" id="addEdu" type="button">+ Add education</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Skills</legend>
+          <label class="field"><input id="skills" type="text" placeholder="JavaScript, CSS, React, Git (comma separated)"></label>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- PREVIEW -->
+    <section class="cv-stage" aria-label="Live preview">
+      <article class="cv" id="cv">
+        <h1 id="p-name" class="name-empty">Your Name</h1>
+        <p class="role" id="p-title"></p>
+        <div class="side">
+          <div id="p-contacts" class="contacts"></div>
+        </div>
+        <div class="main">
+          <div id="p-summary-wrap"></div>
+          <div id="p-xp"></div>
+          <div id="p-edu"></div>
+          <div id="p-skills"></div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <section class="tipjar" aria-label="Support this project">
+    <div class="txt">
+      <strong>Free for everyone, forever.</strong>
+      <p>ClearCV has no ads, no watermark and no account. If it saved you money, a small donation keeps it running. (Optional — never required.)</p>
+    </div>
+    <div>
+      <div class="addr" id="wallet"></div>
+      <a class="btn btn-ghost" href="../tipjar/index.html" style="margin-top:.6rem; display:inline-block;">Support ClearCV &rarr;</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <p>No analytics. No tracking. No data leaves your browser.<br>
+  Built to be a genuinely free tool. If something is missing or broken, the Tip Jar page is the fastest way to reach out.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var wallet = "bc1qehx0caet4zl0ra053dw5qpjrd6th35k00t0765";
+
+  // load wallet display
+  if ($("wallet")) $("wallet").textContent = "BTC: " + wallet;
+
+  function esc(s){ return (s||"").replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];
+  }); }
+
+  // ---- dynamic experience / education entries ----
+  function makeXp(){
+    var d=document.createElement("div"); d.className="item";
+    d.innerHTML =
+      '<button class="del" type="button">remove</button>'+
+      '<div class="row">'+
+        '<label class="field">Role <input class="x-role" type="text" placeholder="Senior Developer"></label>'+
+        '<label class="field">Company <input class="x-org" type="text" placeholder="Acme Corp"></label>'+
+      '</div>'+
+      '<div class="row">'+
+        '<label class="field">Period <input class="x-when" type="text" placeholder="2021 – Present"></label>'+
+      '</div>'+
+      '<label class="field">What you did <textarea class="x-desc" placeholder="Led X, improved Y by Z..."></textarea></label>';
+    d.querySelector(".del").addEventListener("click", function(){ d.remove(); render(); });
+    d.addEventListener("input", render);
+    return d;
+  }
+  function makeEdu(){
+    var d=document.createElement("div"); d.className="item";
+    d.innerHTML =
+      '<button class="del" type="button">remove</button>'+
+      '<div class="row">'+
+        '<label class="field">Degree <input class="e-title" type="text" placeholder="B.Sc. Computer Science"></label>'+
+        '<label class="field">School <input class="e-org" type="text" placeholder="TU Berlin"></label>'+
+      '</div>'+
+      '<label class="field">Period <input class="e-when" type="text" placeholder="2017 – 2021"></label>';
+    d.querySelector(".del").addEventListener("click", function(){ d.remove(); render(); });
+    d.addEventListener("input", render);
+    return d;
+  }
+
+  function render(){
+    var name=$("name").value.trim();
+    var pName=$("p-name");
+    if(name){ pName.textContent=name; pName.classList.remove("name-empty"); }
+    else { pName.textContent="Your Name"; pName.classList.add("name-empty"); }
+    $("p-title").textContent = $("title").value.trim();
+
+    var contacts = [
+      $("email").value.trim(), $("phone").value.trim(),
+      $("location").value.trim(), $("link").value.trim()
+    ].filter(Boolean).map(esc);
+    $("p-contacts").innerHTML = contacts.length ? contacts.join(" · ") : '<span class="empty">Add your email, phone, location or link above.</span>';
+
+    var sum=$("summary").value.trim();
+    $("p-summary-wrap").innerHTML = sum ? '<h3>Summary</h3><p>'+esc(sum)+'</p>' : '';
+
+    var xps = all("xp",".item",".x-desc");
+    // gather from items in order
+    var xpHTML="";
+    Array.prototype.slice.call($("xp").querySelectorAll(".item")).forEach(function(it){
+      var r=it.querySelector(".x-role"), o=it.querySelector(".x-org"),
+          w=it.querySelector(".x-when"), desc=it.querySelector(".x-desc");
+      var any = r.value.trim()||o.value.trim()||w.value.trim()||desc.value.trim();
+      if(!any) return;
+      xpHTML+='<div class="entry"><div class="head">'+
+        '<span><span class="title">'+esc(r.value.trim()||"Role")+'</span> '+
+        (o.value.trim()?'<span class="org">· '+esc(o.value.trim())+'</span>':'')+'</span>'+
+        (w.value.trim()?'<span class="when">'+esc(w.value.trim())+'</span>':'')+
+        '</div>'+(desc.value.trim()?'<p>'+esc(desc.value.trim())+'</p>':'')+'</div>';
+    });
+    $("p-xp").innerHTML = xpHTML ? '<h3>Experience</h3>'+xpHTML : '';
+
+    var eduHTML="";
+    Array.prototype.slice.call($("edu").querySelectorAll(".item")).forEach(function(it){
+      var t=it.querySelector(".e-title"), o=it.querySelector(".e-org"), w=it.querySelector(".e-when");
+      var any=t.value.trim()||o.value.trim()||w.value.trim();
+      if(!any) return;
+      eduHTML+='<div class="entry"><div class="head">'+
+        '<span><span class="title">'+esc(t.value.trim()||"Education")+'</span> '+
+        (o.value.trim()?'<span class="org">· '+esc(o.value.trim())+'</span>':'')+'</span>'+
+        (w.value.trim()?'<span class="when">'+esc(w.value.trim())+'</span>':'')+
+        '</div></div>';
+    });
+    $("p-edu").innerHTML = eduHTML ? '<h3>Education</h3>'+eduHTML : '';
+
+    var skills=$("skills").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+    $("p-skills").innerHTML = skills.length
+      ? '<h3>Skills</h3><ul class="skills">'+skills.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ul>'
+      : '';
+  }
+
+  // template
+  function applyTemplate(){
+    var cv=$("cv"), t=$("tpl").value;
+    cv.classList.remove("tpl-classic","tpl-modern");
+    if(t==="classic") cv.classList.add("tpl-classic");
+    if(t==="modern") cv.classList.add("tpl-modern");
+  }
+  $("tpl").addEventListener("change", function(){ applyTemplate(); trySave(); });
+
+  // bind input events on base fields
+  ["name","title","email","phone","location","link","summary","skills"].forEach(function(id){
+    $(id).addEventListener("input", function(){ render(); trySave(); });
+  });
+
+  $("addXp").addEventListener("click", function(){ var it=makeXp(); $("xp").appendChild(it); render(); });
+  $("addEdu").addEventListener("click", function(){ var it=makeEdu(); $("edu").appendChild(it); render(); });
+
+  $("clear").addEventListener("click", function(){
+    if(!confirm("Clear all fields? This only affects this device.")) return;
+    document.querySelectorAll("#form input, #form textarea").forEach(function(el){ el.value=""; });
+    $("xp").innerHTML=""; $("edu").innerHTML="";
+    try{ localStorage.removeItem("clearcv.draft"); }catch(e){}
+    render();
+  });
+
+  // draft persistence (local only)
+  function trySave(){
+    try{
+      var data={
+        name:$("name").value,title:$("title").value,email:$("email").value,
+        phone:$("phone").value,location:$("location").value,link:$("link").value,
+        summary:$("summary").value,skills:$("skills").value,tpl:$("tpl").value,
+        xp:Array.prototype.slice.call($("xp").querySelectorAll(".item")).map(function(it){
+          return {role:it.querySelector(".x-role").value,org:it.querySelector(".x-org").value,
+                  when:it.querySelector(".x-when").value,desc:it.querySelector(".x-desc").value};
+        }),
+        edu:Array.prototype.slice.call($("edu").querySelectorAll(".item")).map(function(it){
+          return {title:it.querySelector(".e-title").value,org:it.querySelector(".e-org").value,
+                  when:it.querySelector(".e-when").value};
+        })
+      };
+      localStorage.setItem("clearcv.draft", JSON.stringify(data));
+    }catch(e){}
+  }
+  function tryLoad(){
+    try{
+      var raw=localStorage.getItem("clearcv.draft"); if(!raw) return;
+      var d=JSON.parse(raw);
+      ["name","title","email","phone","location","link","summary","skills"].forEach(function(k){
+        if(d[k]!=null) $(k).value=d[k];
+      });
+      if(d.tpl) $("tpl").value=d.tpl;
+      (d.xp||[]).forEach(function(x){ var it=makeXp(); it.querySelector(".x-role").value=x.role||"";
+        it.querySelector(".x-org").value=x.org||""; it.querySelector(".x-when").value=x.when||"";
+        it.querySelector(".x-desc").value=x.desc||""; $("xp").appendChild(it); });
+      (d.edu||[]).forEach(function(e){ var it=makeEdu(); it.querySelector(".e-title").value=e.title||"";
+        it.querySelector(".e-org").value=e.org||""; it.querySelector(".e-when").value=e.when||""; $("edu").appendChild(it); });
+      applyTemplate();
+    }catch(err){}
+  }
+
+  function setMsg(t){ $("status").textContent=t; }
+
+  // Download PDF (client-side)
+  $("download").addEventListener("click", function(){
+    var el=$("cv");
+    if(!window.html2pdf){ setMsg("PDF library still loading — retry in a second, or use Print/Save PDF."); return; }
+    setMsg("Generating PDF…");
+    var opt={
+      margin:[10,10,10,10],
+      filename:"resume.pdf",
+      image:{type:"jpeg", quality:0.98},
+      html2canvas:{scale:2, useCORS:true, logging:false},
+      jsPDF:{unit:"mm", format:"a4", orientation:"portrait"}
+    };
+    html2pdf().set(opt).from(el).save().then(function(){ setMsg("PDF downloaded. No watermark, no tracking."); })
+      .catch(function(err){ setMsg("PDF failed: "+(err&&err.message?err.message:err)+". Try Print/Save PDF."); });
+  });
+
+  $("print").addEventListener("click", function(){ window.print(); });
+
+  // init: one starter entry for each
+  $("xp").appendChild(makeXp());
+  $("edu").appendChild(makeEdu());
+  tryLoad();
+  render();
+})();
+</script>
+</body>
+</html>
