@@ -25,6 +25,8 @@
   header.site .brand span{font-weight:400; opacity:.9;}
   .badges{display:flex; flex-wrap:wrap; gap:.4rem;}
   .badge{font-size:.72rem; font-weight:600; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:.25rem .55rem; border-radius:999px;}
+  .badge-link{background:#fff; color:var(--brand); border-color:#fff; font-weight:700;}
+  .badge-link:hover{background:#f0f3f7;}
   .wrap{max-width:1200px; margin:0 auto; padding:1.2rem;}
   .topbar{display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; justify-content:space-between; margin-bottom:1rem;}
   .template-select{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap;}
@@ -128,6 +130,7 @@
     <span class="badge">No account</span>
     <span class="badge">No paywall</span>
     <span class="badge">Runs in your browser</span>
+    <a class="badge badge-link" href="ats-guide.html" style="text-decoration:none;">ATS guide →</a>
   </div>
 </header>
 
@@ -227,6 +230,7 @@
 
 <footer class="site">
   <p>No analytics. No tracking. No data leaves your browser.<br>
+  <a href="ats-guide.html" style="color:var(--brand);">New: CV ATS guide</a> — 10 rules that actually matter.<br>
   Built to be a genuinely free tool. If something is missing or broken, the Tip Jar page is the fastest way to reach out.</p>
 </footer>
 

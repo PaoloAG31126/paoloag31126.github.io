@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV ATS guide — 10 rules that actually matter</title>
+<meta name="description" content="A short, honest guide to making your resume pass an Applicant Tracking System. No jargon, no hype. Built by Vetro, 100% free.">
+<style>
+:root{--ink:#1a1d24;--muted:#5b6472;--line:#e3e7ee;--brand:#0b6e4f;--bg:#f8f9fb;--card:#fff;--ok:#0b6e4f;--bad:#a8332f}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+.wrap{max-width:720px;margin:0 auto;padding:2rem 1.25rem 4rem}
+a{color:var(--brand);text-decoration:none;border-bottom:1px solid var(--brand)}
+a:hover{opacity:.8}
+
+/* header */
+header{background:#fff;border-bottom:1px solid var(--line);padding:1.5rem 0;margin-bottom:2rem}
+header .wrap{padding:0 1.25rem}
+.badge{display:inline-block;background:#e6f4ee;color:var(--brand);font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:3px;margin-bottom:.6rem}
+h1{font-size:1.65rem;font-weight:700;margin:0 0 .35rem}
+.sub{color:var(--muted);font-size:.95rem;margin:0}
+.by{margin-top:.75rem;font-size:.82rem;color:var(--muted)}
+
+/* sections */
+section{margin-bottom:2.5rem}
+h2{font-size:1.15rem;font-weight:700;margin:0 0 .75rem;padding-bottom:.4rem;border-bottom:2px solid var(--line)}
+h3{font-size:.95rem;font-weight:600;margin:1.2rem 0 .4rem}
+p{margin:0 0 .8rem}
+ul,ol{margin:0 0 .8rem;padding-left:1.4rem}
+li{margin-bottom:.35rem}
+.note{background:#eef6f2;border-left:3px solid var(--brand);padding:.75rem 1rem;border-radius:0 4px 4px 0;font-size:.92rem;margin:.8rem 0}
+.warn{background:#fdf0ef;border-left:3px solid var(--bad);padding:.75rem 1rem;border-radius:0 4px 4px 0;font-size:.92rem;margin:.8rem 0}
+.ok{color:var(--ok);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+
+/* checklist cards */
+.check{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1rem 1.1rem;margin-bottom:.6rem}
+.check .icon{font-size:1.1rem;margin-right:.5rem}
+.check b{display:block;margin-bottom:.15rem;font-size:.95rem}
+.check p{font-size:.88rem;color:var(--muted);margin:0}
+
+/* tip jar */
+.tip{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1rem 1.1rem;margin-top:2rem}
+.tip b{font-size:.95rem}
+.tip p{font-size:.85rem;color:var(--muted);margin:.3rem 0 .6rem}
+.wallet{display:inline-block;background:#f5f6f8;border:1px solid var(--line);border-radius:4px;padding:.3rem .6rem;font-size:.78rem;font-family:monospace;word-break:break-all;max-width:100%}
+
+/* nav links */
+.nav{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
+.nav a{font-size:.85rem}
+
+/* print */
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  header{background:none;border:none;padding:.5rem 0}
+  .tip,.nav{display:none}
+  .check{border:none;background:none;padding:.3rem 0;margin-bottom:.4rem}
+  a{color:#000;border:none;text-decoration:underline}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="badge">Free guide · No account · No paywall</span>
+    <h1>Making your resume pass the ATS</h1>
+    <p class="sub">A short, honest guide. No jargon, no hype — just what actually breaks and what doesn't.</p>
+    <p class="by">Written by <strong>Vetro</strong> · <a href="index.html">← Back to ClearCV builder</a></p>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- WHAT IS ATS -->
+<section>
+  <h2>What an ATS actually is</h2>
+  <p>An Applicant Tracking System (ATS) is the software a company uses to collect and sort job applications. When you upload a resume, the ATS does three things:</p>
+  <ol>
+    <li><strong>Extracts the text</strong> from your file (PDF or .docx) using a text parser.</li>
+    <li><strong>Matches keywords</strong> against the job description to score or rank candidates.</li>
+    <li><strong>Passes a structured summary</strong> to the human recruiter.</li>
+  </ol>
+  <div class="note">
+    The critical insight: <strong>the ATS reads the text layer of your file, not the visual layout.</strong> If the parser can't find your text, you get filtered out before a human ever sees your resume.
+  </div>
+</section>
+
+<!-- WHAT BREAKS -->
+<section>
+  <h2>Things that commonly break ATS parsing</h2>
+
+  <div class="check">
+    <span class="icon">❌</span>
+    <b>Two-column layouts and tables</b>
+    <p>Most ATS parsers read top-to-bottom, left-to-right. A two-column layout causes text to be scrambled or dropped entirely. Single-column is safe. Table cells for layout are the #1 failure mode.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">❌</span>
+    <b>Images, logos, and graphics for structure</b>
+    <p>Photos, company logos, skill bars, and icon rows are decorative. The parser ignores them. If you used a graphic to show "Figma 90%", the ATS sees nothing.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">❌</span>
+    <b>Fancy or embedded fonts</b>
+    <p>Some ATS systems (especially older ones) strip non-standard fonts. Use system fonts: Arial, Calibri, Times New Roman, Helvetica, or a clean sans-serif available on Windows and macOS.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">❌</span>
+    <b>Text inside images or headers/footers</b>
+    <p>Put your name, email, and contact info in the body of the document, not in the document header/footer area. Some parsers skip those regions.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">❌</span>
+    <b>Unusual file formats</b>
+    <p>Submit as <strong>.docx</strong> or <strong>.pdf</strong> only. Avoid .pages, .odt, .tex, or image-based PDFs (a scanned PDF is just an image — no text layer).</p>
+  </div>
+
+  <div class="note">
+    <strong>The 10-second test:</strong> Open your resume PDF, select all the text, and paste it into a plain text editor (Notepad, TextEdit, or <code>less</code> on Linux). If the order is scrambled or sections are missing, an ATS will see the same problem.
+  </div>
+</section>
+
+<!-- WHAT WORKS -->
+<section>
+  <h2>Structure that works</h2>
+
+  <h3>Standard section headings</h3>
+  <p>Use conventional names the ATS keyword matcher expects:</p>
+  <ul>
+    <li><span class="ok">✓</span> Experience / Work History / Employment</li>
+    <li><span class="ok">✓</span> Education / Qualifications / Training</li>
+    <li><span class="ok">✓</span> Skills / Core Competencies / Technical Skills</li>
+    <li><span class="ok">✓</span> Summary / Profile / Professional Summary</li>
+    <li><span class="bad">✗</span> "My Journey", "What I Bring", "The Good Stuff" (creative headings confuse keyword matching)</li>
+  </ul>
+
+  <h3>Dates in a simple format</h3>
+  <p>Write them as a reader and parser both understand:</p>
+  <ul>
+    <li><span class="ok">✓</span> Jan 2021 – Present</li>
+    <li><span class="ok">✓</span> March 2019 – August 2021</li>
+    <li><span class="ok">✓</span> 2020 – 2023</li>
+    <li><span class="bad">✗</span> A timeline graphic, a table with date columns, or "Year 3 of the team era"</li>
+  </ul>
+
+  <h3>Bullet points over paragraphs</h3>
+  <p>Short action-verb bullets (Led, Built, Reduced, Improved) are easier for both the ATS parser and the human recruiter to scan. One achievement per line. Quantify where honest.</p>
+</section>
+
+<!-- KEYWORDS -->
+<section>
+  <h2>Keywords: match the job description</h2>
+  <p>The ATS ranks applications by how well your resume matches the keywords in the job posting. This is not keyword stuffing — it means using the <em>same vocabulary</em> the job description uses.</p>
+  <div class="note">
+    <strong>Practical method:</strong> Open the job description. Underline or copy every skill, tool, certification, and responsibility mentioned. Make sure each one that applies to you appears somewhere in your resume — in the Skills section or in a bullet point.
+  </div>
+  <ul>
+    <li>Job says <em>"Python, pandas, data cleaning"</em> → include those exact terms if you use them.</li>
+    <li>Job says <em>"stakeholder management"</em> → use that phrase, not just "worked with clients".</li>
+    <li>Job says <em>"CI/CD pipelines"</em> → write "CI/CD pipelines", not "build and deploy processes".</li>
+  </ul>
+  <p>You don't need every single keyword. You need the ones that apply to you, in the words the posting uses.</p>
+</section>
+
+<!-- BEFORE APPLYING -->
+<section>
+  <h2>Before you hit Apply</h2>
+  <ol>
+    <li><strong>Copy-paste test:</strong> Select all text from your PDF, paste into Notepad. Read the result top to bottom. If it looks like your resume, you're fine. If it looks like a jumble, fix the layout.</li>
+    <li><strong>Check the file format:</strong> If the job says "PDF preferred", submit a PDF. If it says "any format", submit both — one in the upload box, one attached.</li>
+    <li><strong>Remove irrelevant experience:</strong> 20 years of work history dilutes keyword density. Keep the last 10–15 years unless the job asks for more.</li>
+    <li><strong>Save the file clearly:</strong> <code>FirstName_LastName_Resume.pdf</code> is better than <code>resume_final_v2_(1).pdf</code>.</li>
+  </ol>
+</section>
+
+<!-- MYTHS -->
+<section>
+  <h2>Common myths</h2>
+
+  <div class="check">
+    <span class="icon">🚫</span>
+    <b>"ATS scores my resume out of 100 and rejects me below a threshold"</b>
+    <p>Most modern ATS systems don't do a single numeric score. They extract, match, and pass to a human. The "80% match score" you see in some tools is that tool's own formula, not the ATS.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">🚫</span>
+    <b>"AI-written resumes get flagged and rejected"</b>
+    <p>No ATS is specifically trained to detect AI-generated text. However, generic AI phrasing ("dynamic, results-driven professional") stands out negatively to human readers. The risk is human, not automated.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">🚫</span>
+    <b>"I need to use a specific ATS-optimized template"</b>
+    <p>A clean single-column layout with standard headings is ATS-compatible. You don't need to buy a template. Free tools that produce clean PDFs (like ClearCV) work fine.</p>
+  </div>
+
+  <div class="check">
+    <span class="icon">🚫</span>
+    <b>"A fancy design helps me stand out"</b>
+    <p>Fancy design is invisible to the ATS and can break parsing. The resume you submit to the ATS is not the same one a hiring manager reads in a design portfolio context. Keep it clean.</p>
+  </div>
+</section>
+
+<!-- QUICK CHECKLIST -->
+<section>
+  <h2>Quick checklist — run this before every application</h2>
+  <ol>
+    <li>Single column, no tables for layout?</li>
+    <li>Standard section headings (Experience, Education, Skills)?</li>
+    <li>Keywords from the job description present in my resume?</li>
+    <li>Dates in a simple, readable format?</li>
+    <li>Copy-paste into Notepad looks correct?</li>
+    <li>File is .pdf or .docx, clearly named?</li>
+    <li>No text hidden in images, headers, or footers?</li>
+  </ol>
+  <div class="note">
+    If all seven are yes, your resume is ATS-safe. The next step is making it <em>good</em> to a human — which is a different (and harder) problem.
+  </div>
+</section>
+
+<!-- TIP JAR -->
+<div class="tip">
+  <b>Free and stays free.</b>
+  <p>If this guide (or <a href="index.html">ClearCV</a>) saved you time, a tip is welcome but never required. No tracking, no analytics, no cookies.</p>
+  <span class="wallet">bc1qehx0caet4zl0ra053dw5qpjrd6th35k00t0765</span>
+</div>
+
+<div class="nav">
+  <a href="index.html">← ClearCV builder</a>
+  <a href="#" onclick="window.print();return false">Print this guide</a>
+</div>
+
+</main>
+</body>
+</html>
