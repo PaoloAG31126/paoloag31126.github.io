@@ -148,7 +148,10 @@
       <span class="status" id="status">Your data stays on this device.</span>
       <button class="btn btn-ghost" id="print" type="button">Print / Save PDF</button>
       <button class="btn btn-primary" id="download" type="button">Download PDF</button>
+      <button class="btn btn-ghost" id="exportBtn" type="button">Export</button>
+      <button class="btn btn-ghost" id="importBtn" type="button">Import</button>
       <button class="btn btn-danger" id="clear" type="button">Clear</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
     </div>
   </div>
 
@@ -355,38 +358,41 @@
   });
 
   // draft persistence (local only)
+  function collectData(){
+    return {
+      v:1, app:"clearcv",
+      name:$("name").value,title:$("title").value,email:$("email").value,
+      phone:$("phone").value,location:$("location").value,link:$("link").value,
+      summary:$("summary").value,skills:$("skills").value,tpl:$("tpl").value,
+      xp:Array.prototype.slice.call($("xp").querySelectorAll(".item")).map(function(it){
+        return {role:it.querySelector(".x-role").value,org:it.querySelector(".x-org").value,
+                when:it.querySelector(".x-when").value,desc:it.querySelector(".x-desc").value};
+      }),
+      edu:Array.prototype.slice.call($("edu").querySelectorAll(".item")).map(function(it){
+        return {title:it.querySelector(".e-title").value,org:it.querySelector(".e-org").value,
+                when:it.querySelector(".e-when").value};
+      })
+    };
+  }
+  function applyData(d){
+    ["name","title","email","phone","location","link","summary","skills"].forEach(function(k){
+      if(d[k]!=null) $(k).value=d[k];
+    });
+    if(d.tpl) $("tpl").value=d.tpl;
+    (d.xp||[]).forEach(function(x){ var it=makeXp(); it.querySelector(".x-role").value=x.role||"";
+      it.querySelector(".x-org").value=x.org||""; it.querySelector(".x-when").value=x.when||"";
+      it.querySelector(".x-desc").value=x.desc||""; $("xp").appendChild(it); });
+    (d.edu||[]).forEach(function(e){ var it=makeEdu(); it.querySelector(".e-title").value=e.title||"";
+      it.querySelector(".e-org").value=e.org||""; it.querySelector(".e-when").value=e.when||""; $("edu").appendChild(it); });
+    applyTemplate();
+  }
   function trySave(){
-    try{
-      var data={
-        name:$("name").value,title:$("title").value,email:$("email").value,
-        phone:$("phone").value,location:$("location").value,link:$("link").value,
-        summary:$("summary").value,skills:$("skills").value,tpl:$("tpl").value,
-        xp:Array.prototype.slice.call($("xp").querySelectorAll(".item")).map(function(it){
-          return {role:it.querySelector(".x-role").value,org:it.querySelector(".x-org").value,
-                  when:it.querySelector(".x-when").value,desc:it.querySelector(".x-desc").value};
-        }),
-        edu:Array.prototype.slice.call($("edu").querySelectorAll(".item")).map(function(it){
-          return {title:it.querySelector(".e-title").value,org:it.querySelector(".e-org").value,
-                  when:it.querySelector(".e-when").value};
-        })
-      };
-      localStorage.setItem("clearcv.draft", JSON.stringify(data));
-    }catch(e){}
+    try{ localStorage.setItem("clearcv.draft", JSON.stringify(collectData())); }catch(e){}
   }
   function tryLoad(){
     try{
       var raw=localStorage.getItem("clearcv.draft"); if(!raw) return;
-      var d=JSON.parse(raw);
-      ["name","title","email","phone","location","link","summary","skills"].forEach(function(k){
-        if(d[k]!=null) $(k).value=d[k];
-      });
-      if(d.tpl) $("tpl").value=d.tpl;
-      (d.xp||[]).forEach(function(x){ var it=makeXp(); it.querySelector(".x-role").value=x.role||"";
-        it.querySelector(".x-org").value=x.org||""; it.querySelector(".x-when").value=x.when||"";
-        it.querySelector(".x-desc").value=x.desc||""; $("xp").appendChild(it); });
-      (d.edu||[]).forEach(function(e){ var it=makeEdu(); it.querySelector(".e-title").value=e.title||"";
-        it.querySelector(".e-org").value=e.org||""; it.querySelector(".e-when").value=e.when||""; $("edu").appendChild(it); });
-      applyTemplate();
+      applyData(JSON.parse(raw));
     }catch(err){}
   }
 
@@ -409,6 +415,40 @@
   });
 
   $("print").addEventListener("click", function(){ window.print(); });
+
+  // Export / Import (file JSON) — still 100% local, no upload
+  $("exportBtn").addEventListener("click", function(){
+    try{
+      var data=collectData();
+      var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement("a");
+      a.href=url; a.download="clearcv-resume.json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ try{URL.revokeObjectURL(url);}catch(e){} }, 1000);
+      setMsg("Saved as clearcv-resume.json — keep it, move it, or share it. Nothing was uploaded.");
+    }catch(e){ setMsg("Export failed: "+(e&&e.message?e.message:e)); }
+  });
+  $("importBtn").addEventListener("click", function(){ $("importFile").click(); });
+  $("importFile").addEventListener("change", function(ev){
+    var f=ev.target.files && ev.target.files[0]; if(!f) return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      try{
+        var d=JSON.parse(String(rd.result));
+        if(!d || typeof d!=="object") throw new Error("bad");
+        applyData(d);
+        trySave();
+        render();
+        setMsg("Imported from "+f.name+". Your data stays on this device.");
+      }catch(e){
+        setMsg("Could not import that file — is it a ClearCV export (.json)?");
+      }
+    };
+    rd.onerror=function(){ setMsg("Could not read that file."); };
+    rd.readAsText(f);
+    ev.target.value="";
+  });
 
   // init: one starter entry for each
   $("xp").appendChild(makeXp());
