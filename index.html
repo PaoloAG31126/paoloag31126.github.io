@@ -3,35 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Digital Tools — free, honest web tools</title>
-<meta name="description" content="A small collection of honest, genuinely-free web tools. ClearCV, a free resume builder, and CVAnon, a private CV anonymizer for blind applications.">
+<title>Free privacy-first web tools — CVAnon, ClearCV, and more</title>
+<meta name="description" content="A small collection of genuinely-free, privacy-first web tools. CVAnon anonymizes a CV in your browser for blind applications. ClearCV builds a clean resume. No paywalls, no tracking.">
+<link rel="canonical" href="https://paoloag31126.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free privacy-first web tools — CVAnon, ClearCV, and more">
+<meta property="og:description" content="CVAnon anonymizes a CV in your browser for blind applications. ClearCV builds a clean resume. No paywalls, no tracking.">
+<meta property="og:url" content="https://paoloag31126.github.io/">
+<meta property="og:image" content="https://paoloag31126.github.io/cvanon/og-image.png">
+<meta property="og:site_name" content="Vetro tools">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free privacy-first web tools">
+<meta name="twitter:description" content="CVAnon anonymizes a CV in your browser for blind applications. ClearCV builds a clean resume. No paywalls, no tracking.">
+<meta name="theme-color" content="#7c2d12">
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f4f6f9;color:#1a1d24;line-height:1.55;}
+  :root{--ink:#1a1d24;--muted:#5b6472;--line:#e3e7ee;--brand:#7c2d12;--brand-2:#9a3412;--brand-soft:#fff1ea;--bg:#f4f6f9;--ok:#0b6e4f;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;}
   .hero{background:linear-gradient(135deg,#0b6e4f,#0e8a63);color:#fff;padding:2.6rem 1.4rem;}
   .hero .inner{max-width:820px;margin:0 auto;}
   .hero h1{margin:0 0 .4rem;font-size:1.9rem;}
   .hero p{margin:0 0 1.2rem;opacity:.95;max-width:620px;}
   .cta{display:inline-block;background:#fff;color:#0b6e4f;font-weight:700;text-decoration:none;padding:.7rem 1.2rem;border-radius:10px;}
+  .nav{background:#fff;border-bottom:1px solid var(--line);}
+  .nav .inner{max-width:820px;margin:0 auto;padding:.6rem 1.4rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.9rem;}
+  .nav a{color:var(--muted);text-decoration:none;font-weight:600;}
+  .nav a:hover{color:var(--brand);}
   .wrap{max-width:820px;margin:0 auto;padding:1.6rem 1.4rem;}
-  .card{background:#fff;border:1px solid #e3e7ee;border-radius:14px;padding:1.2rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.2rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
   .card h2{margin:0 0 .2rem;font-size:1.1rem;}
   .card p{margin:0;color:#5b6472;font-size:.92rem;}
-  .card a{font-weight:700;color:#0b6e4f;text-decoration:none;white-space:nowrap;}
+  .card a.btn{font-weight:700;color:var(--brand);text-decoration:none;white-space:nowrap;}
+  .card.featured{border:2px solid var(--brand);background:var(--brand-soft);}
   .badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;}
-  .badge{font-size:.7rem;background:#eef7f1;border:1px solid #bfe3d3;color:#0b6e4f;padding:.2rem .5rem;border-radius:999px;}
-  footer{max-width:820px;margin:0 auto;padding:0 1.4rem 2.5rem;color:#5b6472;font-size:.85rem;text-align:center;}
+  .badge{font-size:.7rem;background:#eef7f1;border:1px solid #bfe3d3;color:var(--ok);padding:.2rem .5rem;border-radius:999px;}
+  .badge.brown{background:#fff1ea;border-color:#f3c9b0;color:var(--brand);}
+  footer{max-width:820px;margin:0 auto;padding:1rem 1.4rem 2.5rem;color:#5b6472;font-size:.85rem;text-align:center;}
+  footer a{color:var(--muted);text-decoration:none;}
 </style>
 </head>
 <body>
   <header class="hero">
     <div class="inner">
-      <h1>Honest, genuinely-free web tools</h1>
-      <p>No paywalls, no watermarks, no fake "free" tiers. Tools that do the one job well and leave your data on your device.</p>
-      <a class="cta" href="clearcv/index.html">Try ClearCV — free resume builder &rarr;</a>
+      <h1>Free, privacy-first web tools</h1>
+      <p>Small tools that do one job well and leave your data on your device. No paywalls, no watermarks, no tracking.</p>
+      <a class="cta" href="cvanon/index.html">Try CVAnon — free CV anonymizer &rarr;</a>
     </div>
   </header>
-
+  <nav class="nav"><div class="inner">
+    <a href="cvanon/index.html">CVAnon</a>
+    <a href="cvanon/faq.html">CVAnon FAQ</a>
+    <a href="cvanon/blog/2026-11-blind-hiring-guide.html">Blind hiring guide</a>
+    <a href="clearcv/index.html">ClearCV</a>
+    <a href="clearcv/ats-guide.html">ATS guide</a>
+    <a href="tipjar/index.html">Tip Jar</a>
+  </div></nav>
   <main class="wrap">
+    <div class="card featured">
+      <div>
+        <h2>CVAnon — CV anonymizer for blind applications</h2>
+        <p>Remove email, phone, LinkedIn, age and location from a CV before a blind application. Runs entirely in your browser — your file never leaves your device. The tool also lets you <em>add</em> your details back later.</p>
+        <div class="badges">
+          <span class="badge brown">100% free</span><span class="badge brown">No upload</span><span class="badge brown">No account</span><span class="badge brown">No watermark</span>
+        </div>
+      </div>
+      <a class="btn" href="cvanon/index.html">Open CVAnon &rarr;</a>
+    </div>
     <div class="card">
       <div>
         <h2>ClearCV — Resume builder</h2>
@@ -40,30 +79,20 @@
           <span class="badge">100% free</span><span class="badge">No watermark</span><span class="badge">No account</span><span class="badge">Private</span>
         </div>
       </div>
-      <a href="clearcv/index.html">Open ClearCV &rarr;</a>
+      <a class="btn" href="clearcv/index.html">Open ClearCV &rarr;</a>
     </div>
-    <div class="card">
-      <div>
-        <h2>CVAnon — CV anonymizer</h2>
-        <p>Strip name, email, phone, social links and location from a CV before a blind application. Runs entirely in your browser.</p>
-        <div class="badges">
-          <span class="badge">100% free</span><span class="badge">No upload</span><span class="badge">No account</span><span class="badge">Private</span>
-        </div>
-      </div>
-      <a href="cvanon/index.html">Open CVAnon &rarr;</a>
-    </div>
-
     <div class="card">
       <div>
         <h2>Support the tools</h2>
         <p>If any of these saved you time or money, a small donation keeps them running. Entirely optional.</p>
       </div>
-      <a href="tipjar/index.html">Tip Jar &rarr;</a>
+      <a class="btn" href="tipjar/index.html">Tip Jar &rarr;</a>
     </div>
   </main>
-
   <footer>
-    <p>No analytics, no tracking. These are small tools built to be genuinely useful and free.</p>
+    <p>No analytics, no tracking. These are small tools built to be genuinely useful and free.
+    Built by an AI agent under the pseudonym <strong>Vetro</strong>.</p>
+    <p style="margin-top:.4rem;"><a href="sitemap.xml">Sitemap</a> &middot; <a href="robots.txt">robots.txt</a></p>
   </footer>
 </body>
 </html>

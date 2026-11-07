@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV anonymization — FAQ. How to anonymize a CV for a blind application.</title>
+<meta name="description" content="Frequently asked questions about anonymizing a CV or resume: blind hiring, personal data, age and location, how to remove identifying info online for free, and what CVAnon does and does not do.">
+<link rel="canonical" href="https://paoloag31126.github.io/cvanon/faq.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CV anonymization — FAQ">
+<meta property="og:description" content="How to anonymize a CV for a blind application, what to remove, and what tools like CVAnon actually do.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does anonymizing a CV mean?","acceptedAnswer":{"@type":"Answer","text":"Anonymizing a CV means removing the information that lets a reader identify you before the merit of your work is assessed: your name, email address, phone number, social links, location (city/country) and, where possible, age-related phrases. The goal is a fairer, blind-style review."}},
+{"@type":"Question","name":"Why should I anonymize my CV or resume?","acceptedAnswer":{"@type":"Answer","text":"Many employers use blind application to reduce unconscious bias around name, age, gender, location or school. In the EU, GDPR also encourages you to share only the personal data strictly needed. Anonymizing is a quick way to protect yourself and to signal that you are a fair-process advocate."}},
+{"@type":"Question","name":"Is it legal to send a CV without my name?","acceptedAnswer":{"@type":"Answer","text":"In most cases yes, especially for public-sector and some private-sector blind hiring. The recruiter may still need your identity at a later stage. Check the employer's instructions first; where the form requires a name, you can use initials or a candidate code."}},
+{"@type":"Question","name":"Can I anonymize a CV online for free?","acceptedAnswer":{"@type":"Answer","text":"Yes. CVAnon is free, runs entirely in your browser and does not upload your file. You paste the text of your CV, press Anonymize, and copy or download the result. There is no account and no watermark."}},
+{"@type":"Question","name":"Does CVAnon upload my file?","acceptedAnswer":{"@type":"Answer","text":"No. The anonymization runs on your device. Nothing leaves your browser, there are no analytics, no tracking and no server-side processing."}},
+{"@type":"Question","name":"What exactly does CVAnon remove?","acceptedAnswer":{"@type":"Answer","text":"Email addresses, social media handles and profile links, phone numbers, age phrases like '38-year-old', and common city and country names. It also tries to match common first names followed by a capitalized surname. Review the result before sending: a tool can't see context the way you do."}},
+{"@type":"Question","name":"CVAnon removed a city or name I wanted to keep. Why?","acceptedAnswer":{"@type":"Answer","text":"The rules are intentionally conservative to avoid missing identifiers. If something was removed by mistake, tweak the original text (e.g., rephrase 'based in Milan' as 'available in EMEA') and run the tool again. The output is always yours to edit."}},
+{"@type":"Question","name":"Does it remove my name?","acceptedAnswer":{"@type":"Answer","text":"It tries. CVAnon looks for a list of common first names followed by a capitalized surname. Unusual names, names written in all caps, or names in the middle of a sentence may not match. Treat the tool as a strong assist, not a guarantee: read the result before you send it."}},
+{"@type":"Question","name":"Can I use CVAnon on a PDF?","acceptedAnswer":{"@type":"Answer","text":"CVAnon works on text. Select the text of your PDF (or use a PDF-to-text tool), paste it here, anonymize, and then paste the result back into your own template. The layout is yours to control."}},
+{"@type":"Question","name":"Does CVAnon store my CV?","acceptedAnswer":{"@type":"Answer","text":"No. The text lives only in the page you have open. Once you close the tab, it is gone. There is no database, no log and no third party."}},
+{"@type":"Question","name":"Why is CVAnon free? What's the catch?","acceptedAnswer":{"@type":"Answer","text":"There is no catch. CVAnon is built to be genuinely free: no ads, no account, no watermark, no paywall. If it helped you, an optional small donation to the public wallet address keeps it running."}},
+{"@type":"Question","name":"What is 'blind hiring' and does it help me?","acceptedAnswer":{"@type":"Answer","text":"Blind hiring (or anonymized recruitment) is a process where the interviewer can't see identifying details like name, age, gender or school. Research shows it can reduce bias. Whether it is mandatory at your target employer varies — but it is a growing practice, especially in the EU public sector."}}
+]}
+</script>
+<style>
+  :root{--ink:#1a1d24;--muted:#5b6472;--line:#e3e7ee;--brand:#7c2d12;--brand-2:#9a3412;--brand-soft:#fff1ea;--bg:#f4f6f9;}
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;}
+  header.site{background:linear-gradient(135deg,#7c2d12,#9a3412);color:#fff;padding:1.1rem 1.4rem;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.2rem;justify-content:space-between;}
+  header.site .brand{font-size:1.35rem;font-weight:800;} header.site .brand span{font-weight:400;opacity:.9;}
+  .badges{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .badge{font-size:.72rem;font-weight:600;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:.25rem .55rem;border-radius:999px;}
+  .wrap{max-width:820px;margin:0 auto;padding:1.5rem 1.2rem;}
+  h1{margin:0 0 .4rem;font-size:1.7rem;line-height:1.25;}
+  .lede{color:var(--muted);margin:0 0 1.4rem;}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:0 0 .8rem;}
+  .faq-item h2{margin:0 0 .4rem;font-size:1.05rem;color:var(--brand);}
+  .faq-item p{margin:0;color:#2a2f3a;font-size:.95rem;}
+  .cta{margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.1rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;}
+  .cta .txt strong{display:block;} .cta .txt p{margin:.25rem 0 0;color:var(--muted);font-size:.9rem;}
+  .btn{cursor:pointer;font-weight:600;padding:.6rem .95rem;border-radius:8px;border:1px solid var(--line);font:inherit;text-decoration:none;display:inline-block;}
+  .btn-ghost{background:#fff;color:var(--ink);} .btn-ghost:hover{background:#f0f3f7;}
+  .btn-primary{background:var(--brand);color:#fff;border-color:var(--brand);} .btn-primary:hover{background:var(--brand-2);}
+  footer.site{max-width:820px;margin:1.5rem auto 2.5rem;padding:0 1.2rem;color:var(--muted);font-size:.85rem;text-align:center;}
+  footer.site a{color:var(--brand);}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="brand">CV<span>Anon</span></div>
+  <div class="badges"><span class="badge">100% free</span><span class="badge">No upload</span><span class="badge">No account</span></div>
+</header>
+
+<main class="wrap">
+  <h1>CV anonymization — FAQ</h1>
+  <p class="lede">Practical answers to common questions about anonymizing a CV or resume for a blind application, including what tools like <a href="index.html">CVAnon</a> actually do and don't do.</p>
+
+  <div class="faq-item">
+    <h2>What does anonymizing a CV mean?</h2>
+    <p>Anonymizing a CV means removing the information that lets a reader identify you before the merit of your work is assessed: your name, email address, phone number, social links, location (city/country) and, where possible, age-related phrases. The goal is a fairer, blind-style review.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Why should I anonymize my CV or resume?</h2>
+    <p>Many employers use blind application to reduce unconscious bias around name, age, gender, location or school. In the EU, GDPR also encourages you to share only the personal data strictly needed. Anonymizing is a quick way to protect yourself and to signal that you are a fair-process advocate.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Is it legal to send a CV without my name?</h2>
+    <p>In most cases yes, especially for public-sector and some private-sector blind hiring. The recruiter may still need your identity at a later stage. Check the employer's instructions first; where the form requires a name, you can use initials or a candidate code.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Can I anonymize a CV online for free?</h2>
+    <p>Yes. CVAnon is free, runs entirely in your browser and does not upload your file. You paste the text of your CV, press Anonymize, and copy or download the result. There is no account and no watermark.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Does CVAnon upload my file?</h2>
+    <p>No. The anonymization runs on your device. Nothing leaves your browser, there are no analytics, no tracking and no server-side processing.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>What exactly does CVAnon remove?</h2>
+    <p>Email addresses, social media handles and profile links, phone numbers, age phrases like "38-year-old", and common city and country names. It also tries to match common first names followed by a capitalized surname. Review the result before sending: a tool can't see context the way you do.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>CVAnon removed a city or name I wanted to keep. Why?</h2>
+    <p>The rules are intentionally conservative to avoid missing identifiers. If something was removed by mistake, tweak the original text (e.g., rephrase "based in Milan" as "available in EMEA") and run the tool again. The output is always yours to edit.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Does it remove my name?</h2>
+    <p>It tries. CVAnon looks for a list of common first names followed by a capitalized surname. Unusual names, names written in all caps, or names in the middle of a sentence may not match. Treat the tool as a strong assist, not a guarantee: read the result before you send it.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Can I use CVAnon on a PDF?</h2>
+    <p>CVAnon works on text. Select the text of your PDF (or use a PDF-to-text tool), paste it here, anonymize, and then paste the result back into your own template. The layout is yours to control.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Does CVAnon store my CV?</h2>
+    <p>No. The text lives only in the page you have open. Once you close the tab, it is gone. There is no database, no log and no third party.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>Why is CVAnon free? What's the catch?</h2>
+    <p>There is no catch. CVAnon is built to be genuinely free: no ads, no account, no watermark, no paywall. If it helped you, an optional small donation to the public wallet address keeps it running.</p>
+  </div>
+
+  <div class="faq-item">
+    <h2>What is "blind hiring" and does it help me?</h2>
+    <p>Blind hiring (or anonymized recruitment) is a process where the interviewer can't see identifying details like name, age, gender or school. Research shows it can reduce bias. Whether it is mandatory at your target employer varies — but it is a growing practice, especially in the EU public sector.</p>
+  </div>
+
+  <div class="cta">
+    <div class="txt">
+      <strong>Try it now — 30 seconds.</strong>
+      <p>Paste the text of your CV, press Anonymize, review, copy. No account.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.6rem;">
+      <a class="btn btn-primary" href="index.html">Anonymize my CV &rarr;</a>
+      <a class="btn btn-ghost" href="blog/2026-11-blind-hiring-guide.html">Read the blind-hiring guide</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <p><a href="../index.html">Other tools</a> · <a href="index.html">CVAnon</a> · <a href="../tipjar/index.html">Support</a></p>
+</footer>
+</body>
+</html>
