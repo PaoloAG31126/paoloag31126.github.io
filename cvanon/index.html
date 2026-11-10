@@ -173,7 +173,7 @@
     ['date-iso', /\b\d{4}[.\-\/](?:0?[1-9]|1[0-2])[.\-\/](?:[0-2]\d|3[01])\b/g, ' [date removed] '],
     ['date-slash', /\b(?:0?[1-9]|1[0-2])[.\-/](?:[0-2]\d|3[01])[.\-/](\d{2,4})\b/g, ' [date removed] '],
     ['date-dot',  /\b(?:0?[1-9]|1[0-2])[.\-](?:[0-2]\d|3[01])[.\-]\d{4}\b/g, ' [date removed] '],
-    ['phone', /(?<!\d)(?:\+[ \t.\/-]?)?(?:\(\d{1,4}\)[ \t.\/-]?)?\d{2,6}(?:[ \t.\/-]?\d{2,6}){1,3}(?!\d)/g, ' [phone removed] '],
+    ['phone', /(?<!\d)(?:(?:\+\d{1,3}[ \t.-]?)?(?:\(\d{1,4}\)[ \t.-]?)?\d{1,7}(?:[ \t.\/\-]\d{1,7}){1,4}|\b\d{9,15}\b)(?!\d)/g, ' [phone removed] '],
     ['age', /\b\d{1,3}[ \t]?(?:year[- ]old|years[- ]old|yrs? old?)\b/gi, ' [age removed] '],
     ['age-phrase', /\b[aA][ \t]+\d{1,3}[ \t]?[- ]?year[- ]?old\b/g, ' a professional '],
     ['city-it', /\b(?:Milan|Milano|Rome|Roma|Naples|Napoli|Turin|Torino|Bologna|Florence|Firenze|Venice|Venezia|Genoa|Genova|Palermo|Catania|Verona|Padua|Padova|Bari|Trieste|Bolzano|Ancona|Lecce|Messina|Bergamo|Brescia|Parma|Modena|Udine|Ravenna|Pesaro|Perugia|Cagliari| Sassari|Sassari|Cesena|Frosinone|Latina|Foggia|Salerno|Potenza|Matera|L'Aquila|Aquila|Terni|Asti|Varese|Como|Pavia|Alessandria|Novara|Biella|Verbano|Cuneo|Siena|Arezzo|Pistoia|Lucca|Livorno|Grosseto|L'Aquila)\b/gi, ' [location removed] '],
@@ -190,7 +190,9 @@
     const stash = (m) => { prot.push(m); return SENT + (prot.length - 1) + SENT; };
 
     // year ranges: 2019-2024, 2019–2024, 2019/2024, 2019 - 2024
-    text = text.replace(/\b(\d{4}\s?[-–/\.]\s?\d{4})\b/g, stash);
+    text = text.replace(/(?<!\d)(19\d{2}|20\d{2})[ \t]*[-–/.][ \t]*(19\d{2}|20\d{2})(?!\d)/g, stash);
+    // year ranges with word separators, e.g. "2019 - 2024"
+    text = text.replace(/(?<!\d)(19\d{2}|20\d{2})[ \t]+[-–][ \t]+(19\d{2}|20\d{2})(?!\d)/g, stash);
     // version numbers, but ONLY when written as a version (v1.2.3, "version 2.1.0").
     // A bare dotted number is left alone: it may be a date or phone, handled by the rules above.
     text = text.replace(/(?<![\w.])v\s?\d+(?:\.\d+){1,4}(?=\s|[\).,]|$)/gi, stash);
