@@ -173,7 +173,7 @@
     ['date-iso', /\b\d{4}[.\-\/](?:0?[1-9]|1[0-2])[.\-\/](?:[0-2]\d|3[01])\b/g, ' [date removed] '],
     ['date-slash', /\b(?:0?[1-9]|1[0-2])[.\-/](?:[0-2]\d|3[01])[.\-/](\d{2,4})\b/g, ' [date removed] '],
     ['date-dot',  /\b(?:0?[1-9]|1[0-2])[.\-](?:[0-2]\d|3[01])[.\-]\d{4}\b/g, ' [date removed] '],
-    ['phone', /(?<!\d)(?:\+?[ \t.\/-]?[ ]?)?(?:\(\d{1,4}\)[ \t.\/-]?)?\d{2,5}(?:[ \t.\/-]?\d{2,5}){1,3}(?!\d)/g, ' [phone removed] '],
+    ['phone', /(?<!\d)(?:\+[ \t.\/-]?)?(?:\(\d{1,4}\)[ \t.\/-]?)?\d{2,6}(?:[ \t.\/-]?\d{2,6}){1,3}(?!\d)/g, ' [phone removed] '],
     ['age', /\b\d{1,3}[ \t]?(?:year[- ]old|years[- ]old|yrs? old?)\b/gi, ' [age removed] '],
     ['age-phrase', /\b[aA][ \t]+\d{1,3}[ \t]?[- ]?year[- ]?old\b/g, ' a professional '],
     ['city-it', /\b(?:Milan|Milano|Rome|Roma|Naples|Napoli|Turin|Torino|Bologna|Florence|Firenze|Venice|Venezia|Genoa|Genova|Palermo|Catania|Verona|Padua|Padova|Bari|Trieste|Bolzano|Ancona|Lecce|Messina|Bergamo|Brescia|Parma|Modena|Udine|Ravenna|Pesaro|Perugia|Cagliari| Sassari|Sassari|Cesena|Frosinone|Latina|Foggia|Salerno|Potenza|Matera|L'Aquila|Aquila|Terni|Asti|Varese|Como|Pavia|Alessandria|Novara|Biella|Verbano|Cuneo|Siena|Arezzo|Pistoia|Lucca|Livorno|Grosseto|L'Aquila)\b/gi, ' [location removed] '],
