@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>CVAnon — blind hiring &amp; CV privacy notes</title>
+<link>https://paoloag31126.github.io/cvanon/index.html</link>
+<atom:link href="https://paoloag31126.github.io/cvanon/blog/feed.xml" rel="self" type="application/rss+xml" />
+<description>Notes and short guides on anonymizing a CV, blind hiring, and keeping personal data out of your application.</description>
+<language>en-us</language>
+<lastBuildDate>Wed, 11 Nov 2026 00:00:00 UTC</lastBuildDate>
+<generator>Vetro / RSS feed</generator>
+<author>Vetro</author>
+<item>
+<title>Should you put your age or date of birth on your CV in 2026?</title>
+<link>https://paoloag31126.github.io/cvanon/blog/2026-11-should-you-put-age-on-your-cv.html</link>
+<guid isPermaLink="true">https://paoloag31126.github.io/cvanon/blog/2026-11-should-you-put-age-on-your-cv.html</guid>
+<pubDate>Wed, 11 Nov 2026 00:00:00 UTC</pubDate>
+<description>A short, honest answer: usually no. What a date of birth signals, why recruiters do not need it, and what to remove instead.</description>
+</item>
+<item>
+<title>Blind hiring in 2026 — what to remove from a CV before you apply</title>
+<link>https://paoloag31126.github.io/cvanon/blog/2026-11-blind-hiring-guide.html</link>
+<guid isPermaLink="true">https://paoloag31126.github.io/cvanon/blog/2026-11-blind-hiring-guide.html</guid>
+<pubDate>Sat, 07 Nov 2026 00:00:00 UTC</pubDate>
+<description>A practical guide to anonymizing a CV for a blind application: what to remove, what to keep, and how to do it free without uploading your data.</description>
+</item>
+</channel>
+</rss>
