@@ -174,16 +174,26 @@
     ['handle', /\b[@][a-zA-Z0-9_]{3,}\b/g, ' [handle removed] '],
     ['link', /\b(?:https?:\/\/|www\.)[a-zA-Z0-9.\-_=?#&%+]+/gi, ' [link removed] '],
     ['social', /\b(?:linkedin\.com|twitter\.com|facebook\.com|instagram\.com|github\.com|youtube\.com|t\.me|medium\.com|dribbble\.com|behance\.net)\/[a-zA-Z0-9_\-./=?#&%+]+/gi, ' [profile removed] '],
+    ['dob-mdy', /\b(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s+\d{4}\b/gi, ' [date removed] '],
+    ['dob-dmy', /\b\d{1,2}(?:st|nd|rd|th)?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?,?\s+\d{4}\b/gi, ' [date removed] '],
     ['date-month', /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4}\b/gi, ' [date removed] '],
     ['date-iso', /\b\d{4}[.\-\/](?:0?[1-9]|1[0-2])[.\-\/](?:[0-2]\d|3[01])\b/g, ' [date removed] '],
     ['date-slash', /\b(?:0?[1-9]|1[0-2])[.\-/](?:[0-2]\d|3[01])[.\-/](\d{2,4})\b/g, ' [date removed] '],
     ['date-dot',  /\b(?:0?[1-9]|1[0-2])[.\-](?:[0-2]\d|3[01])[.\-]\d{4}\b/g, ' [date removed] '],
     ['phone', /(?<!\d)(?:(?:\+\d{1,3}[ \t.-]?)?(?:\(\d{1,4}\)[ \t.-]?)?\d{1,7}(?:[ \t.\/\-]\d{1,7}){1,4}|\b\d{9,15}\b)(?!\d)/g, ' [phone removed] '],
     ['age', /\b\d{1,3}[ \t]?(?:year[- ]old|years[- ]old|yrs? old?)\b/gi, ' [age removed] '],
-    ['age-phrase', /\b[aA][ \t]+\d{1,3}[ \t]?[- ]?year[- ]?old\b/g, ' a professional '],
+    ['age-phrase', /\b(?:[aA][ \t]+)?\d{1,3}[ \t]?[- ]?year[- ]?old\b/g, ' a professional '],
     ['city-it', /\b(?:Milan|Milano|Rome|Roma|Naples|Napoli|Turin|Torino|Bologna|Florence|Firenze|Venice|Venezia|Genoa|Genova|Palermo|Catania|Verona|Padua|Padova|Bari|Trieste|Bolzano|Ancona|Lecce|Messina|Bergamo|Brescia|Parma|Modena|Udine|Ravenna|Pesaro|Perugia|Cagliari| Sassari|Sassari|Cesena|Frosinone|Latina|Foggia|Salerno|Potenza|Matera|L'Aquila|Aquila|Terni|Asti|Varese|Como|Pavia|Alessandria|Novara|Biella|Verbano|Cuneo|Siena|Arezzo|Pistoia|Lucca|Livorno|Grosseto|L'Aquila)\b/gi, ' [location removed] '],
     ['city-en', /\b(?:London|Manchester|Bristol|Birmingham|Leeds|Sheffield|Liverpool|Glasgow|Edinburgh|Dublin|Paris|Lyon|Marseille|Lille|Nantes|Toulouse|Bordeaux|Lisbon|Madrid|Barcelona|Valencia|Seville|Zaragoza|Munich|Berlin|Hamburg|Cologne|Frankfurt|Vienna|Innsbruck|Zurich|Geneva|Basel|Amsterdam|Rotterdam|Utrecht|Antwerp|Brussels|Luxembourg|Prague|Bratislava|Budapest|Warsaw|Krakow|Kraków|Vilnius|Riga|Tallinn|Helsinki|Stockholm|Gothenburg|Oslo|Bergen|Copenhagen|Aarhus)\b/gi, ' [location removed] '],
     ['country', /\b(?:Italy|UK|United Kingdom|USA|United States|France|Spain|Portugal|Germany|Austria|Switzerland|Netherlands|Belgium|Luxembourg|Czech Republic|Czechia|Slovakia|Slo|Slovak|Hungary|Poland|Lithuania|Latvia|Estonia|Finland|Sweden|Norway|Denmark|Ireland|Scotland|Wales|England)\b/g, ' [location removed] '],
+    ['postal', /(?:(?:\bCAP\b|\bpostal\s+code\b|\bzip\b)[ \t:]*|\bI[-.][ \t]?)\d{5}(?!\d)/gi, ' [postal code removed] '],
+    // Italian "codice fiscale" (16 chars: 6 letters, 2 digits, 1 letter, 2 digits, 1 letter, 3 digits, 1 letter).
+    // Only fires with an explicit label (Codice fiscale / codice f.f. / CF) so it cannot eat unrelated strings (L7/L8 #3).
+    ['codice-fiscale', /(?:\bcodice\s+fiscale\b|\bcodice\s+f\.?f\.?\b|\bCF\b)[ \t:.\-]*[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z](?![A-Z0-9])/gi, ' [codice fiscale removed] '],
+    // IBAN (ISO 13616: 2 country letters + 2 check digits + BBAN, 15-34 chars total).
+    // Only fires with an explicit "IBAN" label, so it cannot eat card numbers,
+    // tracking codes or bare 16-char strings without context (L7/L8 #3).
+    ['iban', /\bIBAN\b[ \t:.]*[A-Z]{2}\d{2}[A-Z0-9]{11,30}(?![A-Z0-9])/gi, ' [IBAN removed] '],
     ['name', NAME_RE, ' [name removed] '],
   ];
 
