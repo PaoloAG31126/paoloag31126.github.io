@@ -180,6 +180,13 @@
     ['date-iso', /\b\d{4}[.\-\/](?:0?[1-9]|1[0-2])[.\-\/](?:[0-2]\d|3[01])\b/g, ' [date removed] '],
     ['date-slash', /\b(?:0?[1-9]|1[0-2])[.\-/](?:[0-2]\d|3[01])[.\-/](\d{2,4})\b/g, ' [date removed] '],
     ['date-dot',  /\b(?:0?[1-9]|1[0-2])[.\-](?:[0-2]\d|3[01])[.\-]\d{4}\b/g, ' [date removed] '],
+    // IBAN (ISO 13616: 2 country letters + 2 check digits + BBAN, 15-34 chars).
+    // May be written with spaces/dots/dashes between character blocks.
+    // Only fires with an explicit "IBAN" label, so it cannot eat card numbers,
+    // tracking codes or bare 16-char strings without context (L7/L8 #3).
+    // Placed BEFORE the phone rule so a grouped IBAN is removed whole instead of
+    // being partially eaten as a phone number.
+    ['iban', /\bIBAN\b[ \t:.]*(?:[A-Z0-9][ \t.\/\-]?){15,34}(?![A-Z0-9])/gi, ' [IBAN removed] '],
     ['phone', /(?<!\d)(?:(?:\+\d{1,3}[ \t.-]?)?(?:\(\d{1,4}\)[ \t.-]?)?\d{1,7}(?:[ \t.\/\-]\d{1,7}){1,4}|\b\d{9,15}\b)(?!\d)/g, ' [phone removed] '],
     ['age', /\b\d{1,3}[ \t]?(?:year[- ]old|years[- ]old|yrs? old?)\b/gi, ' [age removed] '],
     ['age-phrase', /\b(?:[aA][ \t]+)?\d{1,3}[ \t]?[- ]?year[- ]?old\b/g, ' a professional '],
@@ -190,10 +197,7 @@
     // Italian "codice fiscale" (16 chars: 6 letters, 2 digits, 1 letter, 2 digits, 1 letter, 3 digits, 1 letter).
     // Only fires with an explicit label (Codice fiscale / codice f.f. / CF) so it cannot eat unrelated strings (L7/L8 #3).
     ['codice-fiscale', /(?:\bcodice\s+fiscale\b|\bcodice\s+f\.?f\.?\b|\bCF\b)[ \t:.\-]*[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z](?![A-Z0-9])/gi, ' [codice fiscale removed] '],
-    // IBAN (ISO 13616: 2 country letters + 2 check digits + BBAN, 15-34 chars total).
-    // Only fires with an explicit "IBAN" label, so it cannot eat card numbers,
-    // tracking codes or bare 16-char strings without context (L7/L8 #3).
-    ['iban', /\bIBAN\b[ \t:.]*[A-Z]{2}\d{2}[A-Z0-9]{11,30}(?![A-Z0-9])/gi, ' [IBAN removed] '],
+
     ['name', NAME_RE, ' [name removed] '],
   ];
 
