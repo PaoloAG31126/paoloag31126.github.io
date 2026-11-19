@@ -220,7 +220,7 @@
     // Language/runtime versions (Python 3.11.4, Go 1.21, Node.js 18.17.1, ...) — protect
     // the whole "Lang vX.Y.Z" before the phone rule can partially eat the dotted number.
     // Context-limited: a version must directly follow a known language/runtime name (L7/L8 #3).
-    text = text.replace(/\b(?:Python|Node\.js|Node|Ruby|Go|Rust|PHP|Java|Kotlin|Swift|Scala|Perl|Erlang|Haskell|C\+\+|C#|Julia|Django|React|Vue|Svelte|Express|Docker|Kubernetes|Jenkins|Gradle|Maven|Apache|Nginx|Redis|Postgres(?:ql)?|MySQL|SQLite|MongoDB|GraphQL|gRPC|WebRTC|WebSockets?)\s+\d+(?:[.\-]\d+){0,4}(?=\s|[).,]|$)/gi, stash);
+    text = text.replace(/\b(?:Python|Node\.js|Node|Ruby|Go|Rust|PHP|Java|Kotlin|Swift|Scala|Perl|Erlang|Haskell|C\+\+|C#|Julia|Django|React|Vue|Svelte|Express|Docker|Kubernetes|Jenkins|Gradle|Maven|Apache|Nginx|Redis|Postgres(?:ql)?|MySQL|SQLite|MongoDB|GraphQL|gRPC|WebRTC|WebSockets?)\s+v?\d+(?:[.\-]\d+){0,4}(?=\s|[).,]|$)/gi, stash);
     // Salary / amount with a letter currency code (45.000 EUR, 1.234.567 USD, 999,99 GBP, ...):
     // the letter code disambiguates this from a phone number, so protect the whole amount.
     text = text.replace(/\b\d{1,3}(?:[.,]\d{3})+[ \t]+(?:EUR|USD|GBP|CHF|SEK|NOK|DKK|PLN|CZK|HUF|RON|BGN|HRK|RSD|MKD|ALL|AMD|AZN|BYN|GEL|KZT|TMT|UZS|TJS|JPY|KRW|CNY|HKD|SGD|AUD|NZD|CAD|INR|BRL|ARS|CLP|COP|PEN|MXN|TWD|IDR|MYR|THB|VND|BDT|PKR|LKR|NPR|AFN|IQD|KWD|SAR|AED|QAR|BHD|OMR|JOD|ILS|EGP|ZAR|NGN|KES|TZS)\b/g, stash);
